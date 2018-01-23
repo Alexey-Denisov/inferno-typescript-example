@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry: "./src/index.tsx", // Point to main file
@@ -42,23 +41,6 @@ module.exports = {
 		new CleanWebpackPlugin(
 			["dist"], {
 				verbose: true
-			}
-		),
-		new webpack.optimize.UglifyJsPlugin(
-			{
-				/**
-				 * mangle: uglify 2's mangle option
-				 */
-				mangle: true,
-
-				/**
-				 * compress: uglify 2's compress option
-				 */
-				compress: {
-					toplevel: true,
-					pure_getters: true,
-					drop_console: false
-				}
 			}
 		),
 		// By default, webpack does `n=>n` compilation with entry files. This concatenates

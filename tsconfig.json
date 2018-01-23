@@ -3,7 +3,6 @@
 	"compilerOptions": {
 		"target": "es6",
 		"module": "es6",
-		"allowJs": false,
 		"allowSyntheticDefaultImports": true,
 		"preserveConstEnums": true,
 		"sourceMap": true,
@@ -19,7 +18,7 @@
 		"jsx": "preserve",
 		"noUnusedLocals": true,
 		"strictNullChecks": true,
-		"removeComments": false
+		"removeComments": true
 	},
 	"include": [
 		"src/**/*"
