@@ -1,11 +1,14 @@
+const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	entry: "./src/index.tsx", // Point to main file
 	output: {
-		path: __dirname + "/dist",
+		path: path.resolve(__dirname, 'dist'),
 		filename: "bundle.js"
 	},
 	resolve: {
@@ -24,6 +27,12 @@ module.exports = {
 				test: /\.jsx?$/,                          // all js and jsx files will be processed by
 				loader: 'babel-loader',                   // babel-loader
 				exclude: /node_modules/                  // ignore node_modules
+			}, {
+				test: /\.(sass|scss)$/,
+				loader: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader!sass-loader'
+				})
 			}
 		]
 	},
@@ -43,6 +52,7 @@ module.exports = {
 				verbose: true
 			}
 		),
+		new ExtractTextPlugin("main.css"),
 		// By default, webpack does `n=>n` compilation with entry files. This concatenates
 		// them into a single chunk.
 		new webpack.optimize.LimitChunkCountPlugin({
